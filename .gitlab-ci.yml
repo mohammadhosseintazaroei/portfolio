@@ -1,0 +1,51 @@
+#############PRODUCTION#############
+darkube_build_automoby-production:
+  image: hamravesh.hamdocker.ir/public/darkube-cli:v1.1
+  only:
+    refs:
+      - master
+  script:
+    - export IMAGE="registry.hamdocker.ir/nirvan/automoby-dashboard-production"
+    - 'darkube build --push -t $IMAGE:$CI_COMMIT_SHORT_SHA -t $IMAGE:$CI_COMMIT_REF_SLUG
+      --file Dockerfile --build-context . --build-arg BUILD_ENV=production'
+  stage: build
+darkube_deploy_automoby-production:
+  image: hamravesh.hamdocker.ir/public/darkube-cli:v1.1
+  only:
+    refs:
+      - master
+  script:
+    - 'darkube deploy --token ${DEPLOY_TOKEN_PRODUCTION}
+      --app-id ${APP_ID_PRODUCTION}  --image-tag "${CI_COMMIT_SHORT_SHA}"
+      --job-id "${CI_JOB_ID}"'
+  stage: deploy
+###############STAGING###############
+darkube_build_automoby-staging:
+  image: hamravesh.hamdocker.ir/public/darkube-cli:v1.1
+  only:
+    refs:
+      - develop
+  script:
+    - export IMAGE="registry.hamdocker.ir/nirvan/automoby-dashboard-staging"
+    - 'darkube build --push -t $IMAGE:$CI_COMMIT_SHORT_SHA -t $IMAGE:$CI_COMMIT_REF_SLUG
+      --file Dockerfile --build-context . --build-arg BUILD_ENV=staging'
+  stage: build
+darkube_deploy_automoby-staging:
+  image: hamravesh.hamdocker.ir/public/darkube-cli:v1.1
+  only:
+    refs:
+      - develop
+  script:
+    - 'darkube deploy --token ${DEPLOY_TOKEN_STAGING}
+      --app-id ${APP_ID_STAGING}  --image-tag "${CI_COMMIT_SHORT_SHA}"
+      --job-id "${CI_JOB_ID}"'
+  stage: deploy
+############MERGE REQUESTS############
+merge_request_pipeline:
+  image: hamravesh.hamdocker.ir/public/darkube-cli:v1.1
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      # && $CI_MERGE_REQUEST_TITLE !~ /^Draft:/'
+      when: manual
+  script:
+    - 'darkube build --file ./Dockerfile --build-context . --build-arg BUILD_ENV=staging'
