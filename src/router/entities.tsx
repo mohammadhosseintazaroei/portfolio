@@ -17,5 +17,4 @@ export const panelEntities: Entity[] = [
     element: <Home />,
     icon: <HomeIcon size={20} />,
   },
-
 ];

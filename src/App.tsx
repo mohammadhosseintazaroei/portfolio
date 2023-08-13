@@ -29,21 +29,21 @@ function App() {
 
   return (
     <BrowserRouter>
-          <CacheProvider value={cacheRtl}>
-            <ThemeProvider theme={mainTheme}>
-              <QueryClientProvider client={queryClient}>
-                <SnackbarProvider maxSnack={3}>
-                  <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
-                    <LanguageProvider>
-                      <SnackbarUtilsConfigurator />
-                      <CssBaseline />
-                      <PanelRouter />
-                    </LanguageProvider>
-                  </LocalizationProvider>
-                </SnackbarProvider>
-              </QueryClientProvider>
-            </ThemeProvider>
-          </CacheProvider>
+      <CacheProvider value={cacheRtl}>
+        <ThemeProvider theme={mainTheme}>
+          <QueryClientProvider client={queryClient}>
+            <SnackbarProvider maxSnack={3}>
+              <LocalizationProvider dateAdapter={AdapterDateFnsJalali}>
+                <LanguageProvider>
+                  <SnackbarUtilsConfigurator />
+                  <CssBaseline />
+                  <PanelRouter />
+                </LanguageProvider>
+              </LocalizationProvider>
+            </SnackbarProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </CacheProvider>
     </BrowserRouter>
   );
 }

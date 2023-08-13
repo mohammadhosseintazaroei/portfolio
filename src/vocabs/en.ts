@@ -1,6 +1,5 @@
 const en = {
-    homee: 'خانه',
-  };
-  
-  export default en;
-  
+  homee: 'خانه',
+};
+
+export default en;

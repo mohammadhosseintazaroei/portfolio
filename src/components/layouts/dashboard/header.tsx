@@ -17,7 +17,6 @@ const Header: FC<HeaderProps> = () => {
         <Typography variant="h6" noWrap component="div" sx={styles.breadcrumbsLink}>
           <RouterBreadcrumbs />
         </Typography>
-
       </Toolbar>
     </AppBar>
   );

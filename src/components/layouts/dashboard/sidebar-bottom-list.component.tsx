@@ -26,9 +26,7 @@ function BottomSidebarList({ open }: Props) {
         ]}
         onClick={handleNightMode}
         size="small"
-      >
-    
-      </Button>
+      ></Button>
       <Button sx={[sxSeparator(styles.listButton), sxSeparator(!open && styles.listButtonClose)]} size="small">
         <ListItem onClick={() => {}} sx={styles.listItem}>
           <ListItemIcon>
