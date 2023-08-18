@@ -1,6 +1,9 @@
 import { useCallback, useContext } from 'react';
 import { LanguageContext } from '../contexts/language';
-
+export enum Lang {
+  FA = 'fa',
+  EN = 'en',
+}
 export const useText = () => {
   const languageContext = useContext(LanguageContext);
   const translator = useCallback((tid: keyof typeof languageContext.dictionary) => {
