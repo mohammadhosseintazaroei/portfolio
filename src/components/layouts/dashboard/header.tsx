@@ -1,14 +1,9 @@
-import { Toolbar, Typography, AppBar, useTheme } from '@mui/material';
-import { type FC } from 'react';
+import { AppBar, Toolbar, Typography, useTheme } from '@mui/material';
 
 import RouterBreadcrumbs from './breadcrumbs.component';
 import headerStyles from './header.style';
 
-interface HeaderProps {
-  open: boolean;
-}
-
-const Header: FC<HeaderProps> = () => {
+const Header = () => {
   const theme = useTheme();
   const styles = headerStyles(theme);
   return (
