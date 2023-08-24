@@ -242,10 +242,10 @@ export const mainTheme = createTheme({
     },
 
     neutral: {
-      main: '#262626',
-      light: '#E3E3E3',
+      main: '#212121',
+      light: '#B8B8B8',
       dark: '#4E4E4E',
-      lighter: '#f8f8f8',
+      lighter: '#FFFFFF',
       darker: '#757575',
     },
   },
