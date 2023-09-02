@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material';
-import { type CSSProperties } from 'react';
 import YekanBakh from '@src/assets/fonts/YekanBakh/YekanBakhFaNum-VF.ttf';
+import { type CSSProperties } from 'react';
 
 declare module '@mui/material/styles/createTheme' {
   interface Theme {
@@ -131,7 +131,7 @@ declare module '@mui/material/Typography' {
 }
 
 export const mainTheme = createTheme({
-  direction: 'rtl',
+  direction: 'ltr',
 
   typography: {
     allVariants: {
@@ -208,6 +208,14 @@ export const mainTheme = createTheme({
   // ],
 
   components: {
+    MuiLink: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          textDecoration: 'none',
+          color: theme.palette.neutral.main,
+        }),
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: `
         @font-face {
@@ -242,11 +250,11 @@ export const mainTheme = createTheme({
     },
 
     neutral: {
-      main: '#212121',
-      light: '#B8B8B8',
-      dark: '#4E4E4E',
+      main: '#707070',
+      light: '#C6C6C6',
+      dark: '#3F3F3F',
       lighter: '#FFFFFF',
-      darker: '#757575',
+      darker: '#212121',
     },
   },
   // FIXME -Mehran: fix types
