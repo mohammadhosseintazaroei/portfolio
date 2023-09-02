@@ -10,7 +10,7 @@ const layoutStyles: Record<string, SxProps<Theme>> = {
     p: 3,
     overflow: 'clip',
     padding: 0,
-    background: '#fafafa',
+    background: (theme) => theme.palette.neutral.darker,
   },
   contentBox: {
     padding: '16px 24px 0 24px',
