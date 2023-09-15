@@ -55,7 +55,7 @@ const Header = () => {
             <Avatar src={Logo} sx={headerStyles.logo} />
           </Box>
         </Link>{' '}
-        <Typography sx={headerStyles.menuContainer} variant="h6" noWrap component="div">
+        <Box sx={headerStyles.menuContainer} variant="h6" noWrap component="div">
           <Box>
             <Box>
               <Box sx={{ flexGrow: 1, display: 'flex' }}>
@@ -118,7 +118,7 @@ const Header = () => {
               </Box>
             </Box>
           </Box>
-        </Typography>
+        </Box>
       </Toolbar>
     </AppBar>
   );
