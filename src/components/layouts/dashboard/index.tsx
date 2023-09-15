@@ -1,25 +1,15 @@
 import { Box } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { Route, Routes } from 'react-router-dom';
 import { useText } from '../../../hooks/useText';
 import { panelEntities } from '../../../router/entities';
 import Header from './header';
 import layoutStyles from './layout.styles';
-import PanelDrawer from './sidebar';
 export const drawerWidth = 220;
 
 export default function DashboardLayout() {
-  const [open, setOpen] = useState(false);
   const translator = useText();
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
   const routes = useMemo(
     () =>
@@ -39,10 +29,8 @@ export default function DashboardLayout() {
   return (
     <>
       <Box sx={layoutStyles.mainContainerBox}>
-        <PanelDrawer open={open} handleDrawerOpen={handleDrawerOpen} handleDrawerClose={handleDrawerClose} />
-
         <Box component="main" sx={layoutStyles.mainComponentBox}>
-          <Header open={open} />
+          <Header />
 
           <Box sx={layoutStyles.contentBox}>
             <Routes>{routes}</Routes>

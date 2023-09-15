@@ -1,6 +1,4 @@
 import { type ReactNode } from 'react';
-import { Home as HomeIcon } from 'react-feather';
-
 import Home from '../components/home';
 
 interface Entity {
@@ -12,9 +10,23 @@ interface Entity {
 
 export const panelEntities: Entity[] = [
   {
-    title: 'خانه',
-    path: '/',
+    title: 'Projects',
+    path: '/projects',
     element: <Home />,
-    icon: <HomeIcon size={20} />,
+  },
+  {
+    title: 'GitHub',
+    path: '/github',
+    element: <Home />,
+  },
+  {
+    title: 'Socials',
+    path: '/socials',
+    element: <Home />,
+  },
+  {
+    title: 'Me',
+    path: '/me',
+    element: <Home />,
   },
 ];
