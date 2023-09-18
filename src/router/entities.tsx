@@ -1,5 +1,6 @@
 import { type ReactNode } from 'react';
 import Home from '../components/home';
+import { GitHubPage } from '../components/github';
 
 interface Entity {
   title: string;
@@ -17,7 +18,7 @@ export const panelEntities: Entity[] = [
   {
     title: 'GitHub',
     path: '/github',
-    element: <Home />,
+    element: <GitHubPage />,
   },
   {
     title: 'Socials',
