@@ -1,5 +1,6 @@
 import { AppBar, Avatar, Box, Link, Toolbar, Typography } from '@mui/material';
 
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Logo from '../../../assets/images/logo.png';
@@ -31,7 +32,7 @@ const Header = () => {
   useEffect(() => {
     {
       panelEntities.map((page, index) => {
-        if (currentUrl === page.path) setPageIndex(index);
+        if (currentUrl === page.path) setPageIndex(index - 1);
         if (currentUrl === '/') {
           setPageIndex(null);
           setMenuItemWidth(homeIconRef.current?.clientWidth);
@@ -84,34 +85,80 @@ const Header = () => {
 
                 <Box display={'flex'} ref={menu}>
                   {panelEntities.map((page, index) => {
+                    const [isTrue, setIsTrue] = useState(false);
+                    console.log(isTrue);
                     return (
-                      <Link component={RouterLink} to={page.path} sx={{ marginRight: '64px' }}>
-                        <Typography
-                          variant="heading2"
-                          key={index}
-                          onClick={(e) => handleCloseNavMenu(e)}
-                          className={`${currentUrl === page.path && 'pageClicked'}`}
-                          sx={[
-                            {
-                              display: 'block',
-                              fontWeight: '400',
+                      <>
+                        {page.title && (
+                          <motion.nav
+                            initial={false}
+                            animate={isTrue ? 'open' : 'closed'}
+                            style={{ marginRight: '64px' }}
+                          >
+                            <Link component={RouterLink} to={page.path}>
+                              <Typography
+                                onMouseEnter={() => {
+                                  setIsTrue(true);
+                                }}
+                                onMouseLeave={() => {
+                                  setIsTrue(false);
+                                  console.log(isTrue);
+                                }}
+                                variant="heading2"
+                                key={index}
+                                onClick={(e) => handleCloseNavMenu(e)}
+                                className={`${currentUrl === page.path && 'pageClicked'}`}
+                                sx={[
+                                  {
+                                    display: 'block',
+                                    fontWeight: '400',
 
-                              cursor: 'pointer',
-                              '&:hover': {
-                                color: (theme) => theme.palette.neutral.light,
-                              },
-                              '&.pageClicked ~ .border': {
-                                display: 'flex',
-                              },
-                            },
-                            sxSeparator(
-                              currentUrl === page.path && { color: (theme) => theme.palette.neutral.lighter }
-                            ),
-                          ]}
-                        >
-                          {page.title}
-                        </Typography>
-                      </Link>
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                      color: (theme) => theme.palette.neutral.light,
+                                    },
+                                    '&.pageClicked ~ .border': {
+                                      display: 'flex',
+                                    },
+                                  },
+                                  sxSeparator(
+                                    currentUrl === page.path && { color: (theme) => theme.palette.neutral.lighter }
+                                  ),
+                                ]}
+                              >
+                                {page.title}
+                              </Typography>
+                              <>
+                                <motion.ul
+                                  variants={{
+                                    open: {
+                                      clipPath: 'inset(0% 0% 0% 0% round 10px)',
+                                      transition: {
+                                        type: 'spring',
+                                        bounce: 0,
+                                        duration: 0.7,
+                                        delayChildren: 0.3,
+                                        staggerChildren: 0.05,
+                                      },
+                                    },
+                                    closed: {
+                                      clipPath: 'inset(10% 50% 90% 50% round 10px)',
+                                      transition: {
+                                        type: 'spring',
+                                        bounce: 0,
+                                        duration: 0.3,
+                                      },
+                                    },
+                                  }}
+                                  // style={{ pointerEvents: isOpen ? 'auto' : 'none', background: 'blue' }}
+                                >
+                                  {page.menuCard}
+                                </motion.ul>
+                              </>
+                            </Link>
+                          </motion.nav>
+                        )}
+                      </>
                     );
                   })}
                 </Box>

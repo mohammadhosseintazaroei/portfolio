@@ -3,6 +3,7 @@ import { type SxProps, type Theme } from '@mui/material';
 const layoutStyles: Record<string, SxProps<Theme>> = {
   mainContainerBox: {
     display: 'flex',
+    background: 'red',
     minHeight: '100vh',
   },
   mainComponentBox: {
