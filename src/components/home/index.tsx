@@ -1,8 +1,3 @@
-import { HomeMenuCard } from '../menu-card';
 export default function Home() {
-  return (
-    <div className="example">
-      <HomeMenuCard />
-    </div>
-  );
+  return <div className="example">Home</div>;
 }

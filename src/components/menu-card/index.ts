@@ -1,1 +1,1 @@
-export { HomeMenuCard } from './menu-home-card';
+export { menuCardGlobalStyles } from './menu-card.global.styles';

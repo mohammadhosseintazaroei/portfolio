@@ -47,13 +47,13 @@ declare module '@mui/material/styles/createPalette' {
     lighter?: string;
     lightest?: string;
     darker?: string;
-    darkest?: string;
+    midnight?: string;
   }
   interface SimplePaletteColorOptions {
     lighter?: string;
     lightest?: string;
     darker?: string;
-    darkest?: string;
+    midnight?: string;
   }
 }
 
@@ -252,6 +252,7 @@ export const mainTheme = createTheme({
     neutral: {
       main: '#707070',
       light: '#C6C6C6',
+      midnight: '#3e3e3e',
       dark: '#3F3F3F',
       lighter: '#FFFFFF',
       darker: '#212121',

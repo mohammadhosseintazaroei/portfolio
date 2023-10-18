@@ -1,7 +1,9 @@
 import { type ReactNode } from 'react';
 import Home from '../components/home';
 import { GitHubPage } from '../components/github';
-import { HomeMenuCard } from '../components/menu-card/menu-home-card';
+import { HomeCard } from '../components/menu-card/home';
+import { GitCard } from '../components/menu-card/github/github-card';
+import { SocialsCard } from '../components/menu-card/socials/socials-card';
 
 interface Entity {
   title?: string;
@@ -15,25 +17,25 @@ export const panelEntities: Entity[] = [
   {
     path: '/',
     element: <Home />,
-    menuCard: <HomeMenuCard />,
+    menuCard: <HomeCard />,
   },
   {
     title: 'Projects',
     path: '/projects',
     element: <Home />,
-    menuCard: <HomeMenuCard />,
+    menuCard: <HomeCard />,
   },
   {
     title: 'GitHub',
     path: '/github',
     element: <GitHubPage />,
-    menuCard: <HomeMenuCard />,
+    menuCard: <GitCard />,
   },
   {
     title: 'Socials',
     path: '/socials',
     element: <Home />,
-    menuCard: <HomeMenuCard />,
+    menuCard: <SocialsCard />,
   },
   {
     title: 'Me',

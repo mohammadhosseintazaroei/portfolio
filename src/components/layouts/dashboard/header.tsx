@@ -93,7 +93,7 @@ const Header = () => {
                           <motion.nav
                             initial={false}
                             animate={isTrue ? 'open' : 'closed'}
-                            style={{ marginRight: '64px' }}
+                            style={{ marginRight: '64px', position: 'relative' }}
                           >
                             <Link component={RouterLink} to={page.path}>
                               <Typography
@@ -129,15 +129,22 @@ const Header = () => {
                                 {page.title}
                               </Typography>
                               <>
-                                <motion.ul
+                                <motion.div
+                                  onMouseEnter={() => {
+                                    setIsTrue(true);
+                                  }}
+                                  onMouseLeave={() => {
+                                    setIsTrue(false);
+                                    console.log(isTrue);
+                                  }}
                                   variants={{
                                     open: {
-                                      clipPath: 'inset(0% 0% 0% 0% round 10px)',
+                                      clipPath: 'inset(0% 0% 0% 0% round 0px)',
                                       transition: {
                                         type: 'spring',
                                         bounce: 0,
-                                        duration: 0.7,
-                                        delayChildren: 0.3,
+                                        duration: 0.6,
+                                        delayChildren: 0.2,
                                         staggerChildren: 0.05,
                                       },
                                     },
@@ -146,14 +153,14 @@ const Header = () => {
                                       transition: {
                                         type: 'spring',
                                         bounce: 0,
-                                        duration: 0.3,
+                                        duration: 0.6,
                                       },
                                     },
                                   }}
-                                  // style={{ pointerEvents: isOpen ? 'auto' : 'none', background: 'blue' }}
+                                  style={{ position: 'absolute', paddingTop: '20px', left: '40%' }}
                                 >
                                   {page.menuCard}
-                                </motion.ul>
+                                </motion.div>
                               </>
                             </Link>
                           </motion.nav>
