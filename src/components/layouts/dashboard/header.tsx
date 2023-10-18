@@ -86,7 +86,6 @@ const Header = () => {
                 <Box display={'flex'} ref={menu}>
                   {panelEntities.map((page, index) => {
                     const [isTrue, setIsTrue] = useState(false);
-                    console.log(isTrue);
                     return (
                       <>
                         {page.title && (
@@ -135,7 +134,6 @@ const Header = () => {
                                   }}
                                   onMouseLeave={() => {
                                     setIsTrue(false);
-                                    console.log(isTrue);
                                   }}
                                   variants={{
                                     open: {
@@ -149,11 +147,11 @@ const Header = () => {
                                       },
                                     },
                                     closed: {
-                                      clipPath: 'inset(10% 50% 90% 50% round 10px)',
+                                      clipPath: 'inset(10% 100% 90% 0% round 10px)',
                                       transition: {
                                         type: 'spring',
                                         bounce: 0,
-                                        duration: 0.6,
+                                        duration: 0.7,
                                       },
                                     },
                                   }}
