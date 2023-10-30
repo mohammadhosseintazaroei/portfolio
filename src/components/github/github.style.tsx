@@ -8,10 +8,10 @@ const gitHubStyles: Record<string, SxProps<Theme>> = {
     justifyContent: 'center',
   },
   reposContainer: {
-    mb: 5,
     background: '#161616',
     p: 2,
     borderRadius: 2,
+    height: 200,
     transition: '.2s',
     '&:hover': {
       background: '#101010',
@@ -42,29 +42,29 @@ const gitHubStyles: Record<string, SxProps<Theme>> = {
   },
   profileImage: {
     borderRadius: '50%',
-    width: '386',
+    width: 280,
     mb: 2,
+  },
+  profileImageSkeleton: {
+    borderRadius: '50%',
   },
   profileName: {
     color: '#fff',
-    fontSize: 30,
-    mb: 1,
+    fontSize: 25,
+    mb: 0.5,
   },
   loginName: {
-    fontSize: 27,
+    fontSize: 22,
     color: '#7F7F7F',
     fontWeight: '500',
-    mb: 2,
+    mb: 1,
   },
   profileBio: {
-    fontSize: 20,
+    fontSize: 18,
     color: '#fff',
     fontWeight: 'lighter',
   },
-  profileContainer: {
-    mb: 30,
-    textAlign: 'center',
-  },
+
   topImages: {
     position: 'relative',
     mb: 14,
@@ -120,6 +120,7 @@ const gitHubStyles: Record<string, SxProps<Theme>> = {
     top: -100,
     left: 350,
   },
+  repoCardLink: { textDecoration: 'none' },
 };
 
 export default gitHubStyles;

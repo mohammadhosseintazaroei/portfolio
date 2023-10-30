@@ -64,12 +64,12 @@ const Header = () => {
                   className={`border ${currentUrl == '/' && 'home'}`}
                   sx={{
                     background: '#fff',
-                    width: `${menuItemWidth ?? 0}px`,
+                    width: `${(menuItemWidth ?? 0) + 20}px`,
                     height: '6px',
                     borderRadius: '10px 10px 100px 100px',
                     top: `${menuItemWidth ? '0' : '-10'}px`,
                     position: 'absolute',
-                    left: `${menuItemLeftOffset ?? 0}px`,
+                    left: `${(menuItemLeftOffset ?? 0) - 10}px`,
                     color: '#fff0',
                     transition: '500ms',
 
@@ -92,7 +92,7 @@ const Header = () => {
                           <motion.nav
                             initial={false}
                             animate={isTrue ? 'open' : 'closed'}
-                            style={{ marginRight: '64px', position: 'relative' }}
+                            style={{ marginRight: '50px', position: 'relative' }}
                           >
                             <Link component={RouterLink} to={page.path}>
                               <Typography
@@ -103,7 +103,7 @@ const Header = () => {
                                   setIsTrue(false);
                                   console.log(isTrue);
                                 }}
-                                variant="heading2"
+                                variant="heading3"
                                 key={index}
                                 onClick={(e) => handleCloseNavMenu(e)}
                                 className={`${currentUrl === page.path && 'pageClicked'}`}
@@ -111,7 +111,6 @@ const Header = () => {
                                   {
                                     display: 'block',
                                     fontWeight: '400',
-
                                     cursor: 'pointer',
                                     '&:hover': {
                                       color: (theme) => theme.palette.neutral.light,
