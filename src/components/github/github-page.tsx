@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, Skeleton } from '@mui/material';
+import { Box, Grid, Skeleton } from '@mui/material';
 import axios from 'axios';
 import { motion, type Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -73,15 +73,21 @@ export function GitHubPage() {
           {!profileData?.avatar_url && (
             <Skeleton variant="rounded" height={280} width={280} sx={styles.profileImageSkeleton} />
           )}
-          <Box>
+          {profileData?.name ? (
             <Box sx={styles.profileName}>{profileData?.name}</Box>
-          </Box>
-          <Box>
-            <Box sx={styles.loginName}>{profileData?.login}</Box>{' '}
-          </Box>
-          <Box>
-            <Box sx={styles.profileBio}>{profileData?.bio}</Box>{' '}
-          </Box>
+          ) : (
+            <Skeleton variant="text" height={50} width={270} />
+          )}
+          {profileData?.login ? (
+            <Box sx={styles.loginName}>{profileData?.login}</Box>
+          ) : (
+            <Skeleton variant="text" height={30} width={270} />
+          )}
+          {profileData?.bio ? (
+            <Box sx={styles.profileBio}>{profileData?.bio}</Box>
+          ) : (
+            <Skeleton variant="text" height={25} width={270} />
+          )}
         </Grid>
         <Grid item xs={6} sx={{ transform: 'scale(0.7) translateY(-218px)' }}>
           <Box sx={styles.topImages}>
@@ -162,7 +168,23 @@ export function GitHubPage() {
           })}
         </Grid>
       ) : (
-        <CircularProgress />
+        <Grid container sx={styles.reposGridContainer} spacing={3}>
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" height={200} width={'100%'} />
+          </Grid>
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" height={200} width={'100%'} />
+          </Grid>
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" height={200} width={'100%'} />
+          </Grid>
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" height={200} width={'100%'} />
+          </Grid>
+          <Grid item xs={6}>
+            <Skeleton variant="rectangular" height={200} width={'100%'} />
+          </Grid>
+        </Grid>
       )}
     </Box>
   );
