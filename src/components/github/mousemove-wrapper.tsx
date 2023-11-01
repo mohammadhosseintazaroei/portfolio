@@ -26,7 +26,7 @@ export const MousemoveWrapper = (props: Props) => {
       <Box
         component={motion.div}
         style={{
-          transition: '.2s',
+          transition: '.1s .3ms',
           position: 'absolute',
           x: x / props.xSide - (props?.minusNumber ?? 40),
           y: y / props.ySide - (props?.minusNumber ?? 40),

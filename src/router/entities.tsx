@@ -4,6 +4,7 @@ import { GitHubPage } from '../components/github';
 import { HomeCard } from '../components/menu-card/home';
 import { GitCard } from '../components/menu-card/github/github-card';
 import { SocialsCard } from '../components/menu-card/socials/socials-card';
+import { ProjectsCard } from '../components/menu-card/projects/projects-card';
 
 interface Entity {
   title?: string;
@@ -23,7 +24,7 @@ export const panelEntities: Entity[] = [
     title: 'Projects',
     path: '/projects',
     element: <Home />,
-    menuCard: <HomeCard />,
+    menuCard: <ProjectsCard />,
   },
   {
     title: 'GitHub',

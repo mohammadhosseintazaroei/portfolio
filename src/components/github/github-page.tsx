@@ -42,6 +42,21 @@ export function GitHubPage() {
         duration: 0.8,
       },
     },
+    onhover: {
+      scale: 1.04,
+
+      transition: {
+        type: 'spring',
+        duration: 0.5,
+      },
+    },
+    ontap: {
+      scale: 1,
+      transition: {
+        type: 'spring',
+        duration: 0.5,
+      },
+    },
   };
 
   useEffect(() => {
@@ -133,6 +148,8 @@ export function GitHubPage() {
                   initial="offscreen"
                   whileInView="onscreen"
                   viewport={{ once: true, amount: 0.8 }}
+                  whileHover={'onhover'}
+                  whileTap={'ontap'}
                 >
                   <Box component={motion.div} variants={repoCardVariants}>
                     <Box component={'a'} href={repo.html_url} target="_blank" sx={styles.repoCardLink}>
