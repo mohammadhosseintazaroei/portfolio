@@ -121,7 +121,7 @@ export function GitHubPage() {
                 <Box component={'img'} src={github} sx={styles.github} />
               </Box>
             }
-            xSide={20}
+            xSide={30}
             ySide={20}
             minusNumber={80}
           />
