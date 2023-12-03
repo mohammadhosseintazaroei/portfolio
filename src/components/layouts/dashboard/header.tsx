@@ -6,7 +6,7 @@ import { Link as RouterLink, useLocation } from 'react-router-dom';
 import Logo from '../../../assets/images/logo.png';
 import { panelEntities } from '../../../router/entities';
 import { sxSeparator } from '../../../utils/sxSeparator';
-import headerStyles from './header.style';
+import { headerStyles as styles } from './header.style';
 
 const Header = () => {
   const location = useLocation();
@@ -49,124 +49,102 @@ const Header = () => {
   });
 
   return (
-    <AppBar position="sticky" enableColorOnDark sx={headerStyles.headerWrapper}>
-      <Toolbar sx={headerStyles.headerToolbar}>
+    <AppBar position="sticky" enableColorOnDark sx={styles.headerWrapper}>
+      <Toolbar sx={styles.headerToolbar}>
         <Link component={RouterLink} to="/">
           <Box ref={homeIconRef} onClick={(e) => handleCloseNavMenu(e)}>
-            <Avatar src={Logo} sx={headerStyles.logo} />
+            <Avatar src={Logo} sx={styles.logo} />
           </Box>
         </Link>{' '}
-        <Box sx={headerStyles.menuContainer} component="div">
+        <Box sx={styles.menuContainer} component="div">
           <Box>
             <Box>
-              <Box sx={{ flexGrow: 1, display: 'flex' }}>
-                <Box
-                  className={`border ${currentUrl == '/' && 'home'}`}
-                  sx={{
-                    background: '#fff',
-                    width: `${menuItemWidth ?? 0}px`,
-                    height: '6px',
-                    borderRadius: '10px 10px 100px 100px',
+              <Box
+                className={`border ${currentUrl == '/' && 'home'}`}
+                sx={[
+                  sxSeparator(styles.animateBorder),
+                  {
+                    width: `${(menuItemWidth ?? 0) + 20}px`,
                     top: `${menuItemWidth ? '0' : '-10'}px`,
-                    position: 'absolute',
-                    left: `${menuItemLeftOffset ?? 0}px`,
-                    color: '#fff0',
-                    transition: '500ms',
-
-                    '&.border:has(~ .pageClicked)': {
-                      color: 'red',
-                    },
+                    left: `${(menuItemLeftOffset ?? 0) - 10}px`,
                     '&.home': {
                       top: `${homeIconTop ? homeIconTop + 15 : 0}px`,
                       height: '8px',
                     },
-                  }}
-                ></Box>
+                  },
+                ]}
+              ></Box>
 
-                <Box display={'flex'} ref={menu}>
-                  {panelEntities.map((page, index) => {
-                    const [isTrue, setIsTrue] = useState(false);
-                    return (
-                      <>
-                        {page.title && (
-                          <motion.nav
-                            initial={false}
-                            animate={isTrue ? 'open' : 'closed'}
-                            style={{ marginRight: '64px', position: 'relative' }}
-                          >
-                            <Link component={RouterLink} to={page.path}>
-                              <Typography
-                                onMouseEnter={() => {
-                                  setIsTrue(true);
-                                }}
-                                onMouseLeave={() => {
-                                  setIsTrue(false);
-                                  console.log(isTrue);
-                                }}
-                                variant="heading2"
-                                key={index}
-                                onClick={(e) => handleCloseNavMenu(e)}
-                                className={`${currentUrl === page.path && 'pageClicked'}`}
-                                sx={[
-                                  {
-                                    display: 'block',
-                                    fontWeight: '400',
-
-                                    cursor: 'pointer',
-                                    '&:hover': {
-                                      color: (theme) => theme.palette.neutral.light,
-                                    },
-                                    '&.pageClicked ~ .border': {
-                                      display: 'flex',
-                                    },
+              <Box display={'flex'} ref={menu}>
+                {panelEntities.map((page, index) => {
+                  const [isTrue, setIsTrue] = useState(false);
+                  return (
+                    <>
+                      {page.title && (
+                        <motion.nav
+                          initial={false}
+                          animate={isTrue ? 'open' : 'closed'}
+                          style={{ marginRight: '50px', position: 'relative' }}
+                        >
+                          <Link component={RouterLink} to={page.path}>
+                            <Typography
+                              onMouseEnter={() => {
+                                setIsTrue(true);
+                              }}
+                              onMouseLeave={() => {
+                                setIsTrue(false);
+                                console.log(isTrue);
+                              }}
+                              variant="heading3"
+                              key={index}
+                              onClick={(e) => handleCloseNavMenu(e)}
+                              className={`${currentUrl === page.path && 'pageClicked'}`}
+                              sx={[
+                                sxSeparator(styles.menuItem),
+                                sxSeparator(
+                                  currentUrl === page.path && { color: (theme) => theme.palette.neutral.lighter }
+                                ),
+                              ]}
+                            >
+                              {page.title}
+                            </Typography>
+                            <motion.div
+                              onMouseEnter={() => {
+                                setIsTrue(true);
+                              }}
+                              onMouseLeave={() => {
+                                setIsTrue(false);
+                              }}
+                              variants={{
+                                open: {
+                                  clipPath: 'inset(0% 0% 0% 0% round 0px)',
+                                  transition: {
+                                    type: 'spring',
+                                    bounce: 0,
+                                    duration: 0.6,
+                                    delayChildren: 0.2,
+                                    staggerChildren: 0.05,
                                   },
-                                  sxSeparator(
-                                    currentUrl === page.path && { color: (theme) => theme.palette.neutral.lighter }
-                                  ),
-                                ]}
-                              >
-                                {page.title}
-                              </Typography>
-                              <>
-                                <motion.div
-                                  onMouseEnter={() => {
-                                    setIsTrue(true);
-                                  }}
-                                  onMouseLeave={() => {
-                                    setIsTrue(false);
-                                  }}
-                                  variants={{
-                                    open: {
-                                      clipPath: 'inset(0% 0% 0% 0% round 0px)',
-                                      transition: {
-                                        type: 'spring',
-                                        bounce: 0,
-                                        duration: 0.6,
-                                        delayChildren: 0.2,
-                                        staggerChildren: 0.05,
-                                      },
-                                    },
-                                    closed: {
-                                      clipPath: 'inset(10% 100% 90% 0% round 10px)',
-                                      transition: {
-                                        type: 'spring',
-                                        bounce: 0,
-                                        duration: 0.7,
-                                      },
-                                    },
-                                  }}
-                                  style={{ position: 'absolute', paddingTop: '20px', left: '40%' }}
-                                >
-                                  {page.menuCard}
-                                </motion.div>
-                              </>
-                            </Link>
-                          </motion.nav>
-                        )}
-                      </>
-                    );
-                  })}
-                </Box>
+                                },
+                                closed: {
+                                  clipPath: 'inset(10% 100% 90% 0% round 10px)',
+                                  transition: {
+                                    type: 'spring',
+                                    bounce: 0,
+                                    duration: 0.7,
+                                  },
+                                },
+                              }}
+                              style={{ position: 'absolute', paddingTop: '20px', left: '40%' }}
+                            >
+                              {page.menuCard}
+                            </motion.div>
+                          </Link>
+                        </motion.nav>
+                      )}
+                    </>
+                  );
+                })}
               </Box>
             </Box>
           </Box>
