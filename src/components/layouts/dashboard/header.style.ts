@@ -23,7 +23,10 @@ export const headerStyles: Record<string, SxProps<Theme>> = {
     py: 3,
     paddingLeft: '50px !important',
   },
-
+  headerToolbarMobile: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   searchIconWrapper: {
     right: '16px',
     padding: '0',
@@ -54,5 +57,12 @@ export const headerStyles: Record<string, SxProps<Theme>> = {
     '&.pageClicked ~ .border': {
       display: 'flex',
     },
+  },
+  hamburgerMenuButton: {
+    zIndex: 10,
+  },
+  mobileMenuItem: {
+    py: 0.5,
+    px: 2,
   },
 };
