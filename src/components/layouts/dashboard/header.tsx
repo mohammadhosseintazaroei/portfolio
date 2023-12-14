@@ -124,6 +124,37 @@ const Header = () => {
                               >
                                 {page.title}
                               </Typography>
+                              <motion.div
+                                onMouseEnter={() => {
+                                  setIsHoveredItemPath(page.path);
+                                }}
+                                onMouseLeave={() => {
+                                  setIsHoveredItemPath(null);
+                                }}
+                                variants={{
+                                  open: {
+                                    clipPath: 'inset(0% 0% 0% 0% round 0px)',
+                                    transition: {
+                                      type: 'spring',
+                                      bounce: 0,
+                                      duration: 0.6,
+                                      delayChildren: 0.2,
+                                      staggerChildren: 0.05,
+                                    },
+                                  },
+                                  closed: {
+                                    clipPath: 'inset(10% 100% 90% 0% round 10px)',
+                                    transition: {
+                                      type: 'spring',
+                                      bounce: 0,
+                                      duration: 0.7,
+                                    },
+                                  },
+                                }}
+                                style={{ position: 'absolute', paddingTop: '20px', left: '40%' }}
+                              >
+                                {page.menuCard}
+                              </motion.div>
                             </Link>
                           </motion.nav>
                         )}
@@ -230,37 +261,6 @@ const Header = () => {
                               >
                                 {page.title}
                               </Typography>
-                              <motion.div
-                                onMouseEnter={() => {
-                                  setIsHoveredItemPath(page.path);
-                                }}
-                                onMouseLeave={() => {
-                                  setIsHoveredItemPath(null);
-                                }}
-                                variants={{
-                                  open: {
-                                    clipPath: 'inset(0% 0% 0% 0% round 0px)',
-                                    transition: {
-                                      type: 'spring',
-                                      bounce: 0,
-                                      duration: 0.6,
-                                      delayChildren: 0.2,
-                                      staggerChildren: 0.05,
-                                    },
-                                  },
-                                  closed: {
-                                    clipPath: 'inset(10% 100% 90% 0% round 10px)',
-                                    transition: {
-                                      type: 'spring',
-                                      bounce: 0,
-                                      duration: 0.7,
-                                    },
-                                  },
-                                }}
-                                style={{ position: 'absolute', paddingTop: '20px', left: '40%' }}
-                              >
-                                {page.menuCard}
-                              </motion.div>
                             </Link>
                           </motion.nav>
                         </motion.div>
