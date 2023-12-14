@@ -244,7 +244,7 @@ export const mainTheme = createTheme({
       lightest: 'rgba(236, 235, 255, 0.2)',
     },
     secondary: {
-      main: '#F5B414',
+      main: '#3d3d3d',
       light: '#FFF2D1',
       dark: '#EB9100',
     },

@@ -1,4 +1,4 @@
-import { Box, Grid, Skeleton } from '@mui/material';
+import { Box, Button, Grid, Skeleton } from '@mui/material';
 import axios from 'axios';
 import { motion, type Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
@@ -13,6 +13,7 @@ import typescript from '../../assets/images/typescript 1.png';
 import { TypoText } from '../globals/typo-text';
 import styles from './github.style';
 import { MousemoveWrapper } from './mousemove-wrapper';
+import { useText } from '../../hooks/useText';
 
 interface Repo {
   name: string;
@@ -29,7 +30,7 @@ interface ProfileData {
 export function GitHubPage() {
   const [repos, setRepos] = useState<Repo[]>();
   const [profileData, setProfileData] = useState<ProfileData>();
-
+  const translator = useText();
   const repoCardVariants: Variants = {
     offscreen: {
       y: 300,
@@ -175,6 +176,9 @@ export function GitHubPage() {
                               </>
                             ))}
                           </Grid>
+                          <Button color="secondary" variant="contained">
+                            {translator('open_in_github')}
+                          </Button>
                         </Grid>
                       </Box>
                     </Box>
