@@ -108,7 +108,7 @@ const Header = () => {
                           onMouseLeave={() => {
                             setIsHoveredItemPath(null);
                           }}
-                          variant="heading3"
+                          variant="heading5"
                           key={index}
                           onClick={(e) => handleCloseNavMenu(e)}
                           className={`${currentUrl === page.path && 'pageClicked'}`}
@@ -160,13 +160,25 @@ const Header = () => {
           </Box>
         </Toolbar>
       ) : (
-        <Toolbar sx={styles.headerToolbarMobile}>
-          <Link component={RouterLink} to="/">
-            <Box ref={homeIconRef} onClick={(e) => handleCloseNavMenu(e)}>
-              <Avatar src={Logo} sx={styles.logo} />
-            </Box>
-          </Link>{' '}
-          <Box component={motion.nav} initial={false} animate={openMobileMenu ? 'open' : 'closed'}>
+        <Box sx={styles.mobileHeaderWrapper}>
+          <Toolbar sx={styles.headerToolbarMobile}>
+            <Link component={RouterLink} to="/">
+              <Box ref={homeIconRef} onClick={(e) => handleCloseNavMenu(e)}>
+                <Avatar src={Logo} sx={[sxSeparator(styles.logo), sxSeparator(styles.mobileLogo)]} />
+              </Box>
+            </Link>
+
+            <Button onClick={handleClickMobileMenuButton} sx={styles.hamburgerMenuButton}>
+              <Menu size={26} />
+            </Button>
+          </Toolbar>
+
+          <Box
+            component={motion.nav}
+            initial={false}
+            animate={openMobileMenu ? 'open' : 'closed'}
+            sx={{ height: '100%' }}
+          >
             <Box
               component={motion.nav}
               variants={{
@@ -182,10 +194,11 @@ const Header = () => {
                 },
                 closed: {
                   clipPath: 'inset(0% 0% 100% 0% round 0)',
+
                   transition: {
                     type: 'spring',
                     bounce: 0,
-                    duration: 0.7,
+                    duration: 0.8,
                   },
                 },
               }}
@@ -231,10 +244,7 @@ const Header = () => {
               })}
             </Box>
           </Box>
-          <Button onClick={handleClickMobileMenuButton} sx={styles.hamburgerMenuButton}>
-            <Menu />
-          </Button>
-        </Toolbar>
+        </Box>
       )}
     </AppBar>
   );
