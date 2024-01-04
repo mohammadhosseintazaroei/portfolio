@@ -14,10 +14,12 @@ export const headerStyles: Record<string, SxProps<Theme>> = {
   headerWrapper: {
     boxShadow: 'none',
     background: 'none',
+    position: 'sticky',
   },
   headerToolbar: {
     display: 'flex',
     minHeight: '72px !important',
+    gap: '50px',
     justifyContent: 'start',
     color: (theme) => theme.palette.neutral.light,
     py: 3,
@@ -32,9 +34,7 @@ export const headerStyles: Record<string, SxProps<Theme>> = {
     padding: '0',
     color: (theme) => theme.palette.neutral.dark,
   },
-  menuContainer: {
-    marginLeft: '50px',
-  },
+
   animateBorder: {
     background: (theme) => theme.palette.neutral.lighter,
     height: '6px',
@@ -60,9 +60,34 @@ export const headerStyles: Record<string, SxProps<Theme>> = {
   },
   hamburgerMenuButton: {
     zIndex: 10,
+    color: (theme) => theme.palette.neutral.light,
   },
-  mobileMenuItem: {
-    py: 0.5,
-    px: 2,
+  mobileMenuItem: { marginRight: '50px', position: 'relative' },
+  mobileMenuItemText: {
+    py: 1,
+  },
+  menuWrapper: {
+    display: 'flex',
+    gap: '50px',
+  },
+  menuItemWrapper: {
+    position: 'relative',
+  },
+  activeMenuItem: {
+    color: (theme) => theme.palette.neutral.lighter,
+  },
+  menuCardWrapper: {
+    position: 'absolute',
+    paddingTop: '20px',
+    left: '40%',
+  },
+  mobileMenuItemWrapper: {
+    position: 'absolute',
+    padding: '20px',
+    left: '0%',
+    top: 0,
+    background: '#3A3A3A',
+    width: '100vw',
+    height: '100vh',
   },
 };

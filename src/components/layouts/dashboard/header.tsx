@@ -9,6 +9,14 @@ import Logo from '../../../assets/images/logo.png';
 import { panelEntities } from '../../../router/entities';
 import { sxSeparator } from '../../../utils/sxSeparator';
 import { headerStyles as styles } from './header.style';
+const mobileMenuItemVarients: Variants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 24 },
+  },
+  closed: { opacity: 0, y: 40, transition: { duration: 0.2 } },
+};
 const Header = () => {
   const location = useLocation();
   const currentUrl = location.pathname;
@@ -57,113 +65,98 @@ const Header = () => {
     setOpenMobileMenu(!openMobileMenu);
   };
 
-  const mobileMenuItemVarients: Variants = {
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: { type: 'spring', stiffness: 300, damping: 24 },
-    },
-    closed: { opacity: 0, y: 20, transition: { duration: 0.2 } },
-  };
   return (
-    <AppBar position="sticky" enableColorOnDark sx={styles.headerWrapper}>
+    <AppBar enableColorOnDark sx={styles.headerWrapper}>
       {matches ? (
         <Toolbar sx={styles.headerToolbar}>
           <Link component={RouterLink} to="/">
             <Box ref={homeIconRef} onClick={(e) => handleCloseNavMenu(e)}>
               <Avatar src={Logo} sx={styles.logo} />
             </Box>
-          </Link>{' '}
-          <Box sx={styles.menuContainer} component="div">
-            <Box>
-              <Box>
-                <Box
-                  className={`border ${currentUrl == '/' && 'home'}`}
-                  sx={[
-                    sxSeparator(styles.animateBorder),
-                    {
-                      width: `${(menuItemWidth ?? 0) + 20}px`,
-                      top: `${menuItemWidth ? '0' : '-10'}px`,
-                      left: `${(menuItemLeftOffset ?? 0) - 10}px`,
-                      '&.home': {
-                        top: `${homeIconTop ? homeIconTop + 15 : 0}px`,
-                        height: '8px',
-                      },
-                    },
-                  ]}
-                ></Box>
-
-                <Box display={'flex'} ref={menu}>
-                  {panelEntities.map((page, index) => {
-                    return (
-                      <>
-                        {page.title && (
-                          <motion.nav
-                            initial={false}
-                            animate={isHoveredItemPath === page.path ? 'open' : 'closed'}
-                            style={{ marginRight: '50px', position: 'relative' }}
-                          >
-                            <Link component={RouterLink} to={page.path}>
-                              <Typography
-                                onMouseEnter={() => {
-                                  setIsHoveredItemPath(page.path);
-                                }}
-                                onMouseLeave={() => {
-                                  setIsHoveredItemPath(null);
-                                }}
-                                variant="heading3"
-                                key={index}
-                                onClick={(e) => handleCloseNavMenu(e)}
-                                className={`${currentUrl === page.path && 'pageClicked'}`}
-                                sx={[
-                                  sxSeparator(styles.menuItem),
-                                  sxSeparator(
-                                    currentUrl === page.path && { color: (theme) => theme.palette.neutral.lighter }
-                                  ),
-                                ]}
-                              >
-                                {page.title}
-                              </Typography>
-                              <motion.div
-                                onMouseEnter={() => {
-                                  setIsHoveredItemPath(page.path);
-                                }}
-                                onMouseLeave={() => {
-                                  setIsHoveredItemPath(null);
-                                }}
-                                variants={{
-                                  open: {
-                                    clipPath: 'inset(0% 0% 0% 0% round 0px)',
-                                    transition: {
-                                      type: 'spring',
-                                      bounce: 0,
-                                      duration: 0.6,
-                                      delayChildren: 0.2,
-                                      staggerChildren: 0.05,
-                                    },
-                                  },
-                                  closed: {
-                                    clipPath: 'inset(10% 100% 90% 0% round 10px)',
-                                    transition: {
-                                      type: 'spring',
-                                      bounce: 0,
-                                      duration: 0.7,
-                                    },
-                                  },
-                                }}
-                                style={{ position: 'absolute', paddingTop: '20px', left: '40%' }}
-                              >
-                                {page.menuCard}
-                              </motion.div>
-                            </Link>
-                          </motion.nav>
-                        )}
-                      </>
-                    );
-                  })}
-                </Box>
-              </Box>
-            </Box>
+          </Link>
+          <Box
+            className={`border ${currentUrl == '/' && 'home'}`}
+            sx={[
+              sxSeparator(styles.animateBorder),
+              {
+                width: `${(menuItemWidth ?? 0) + 20}px`,
+                top: `${menuItemWidth ? '0' : '-10'}px`,
+                left: `${(menuItemLeftOffset ?? 0) - 10}px`,
+                '&.home': {
+                  top: `${homeIconTop ? homeIconTop + 15 : 0}px`,
+                  height: '8px',
+                },
+              },
+            ]}
+          ></Box>
+          <Box sx={styles.menuWrapper} ref={menu}>
+            {panelEntities.map((page, index) => {
+              return (
+                <>
+                  {page.title && (
+                    <Box
+                      component={motion.div}
+                      initial={false}
+                      animate={isHoveredItemPath === page.path ? 'open' : 'closed'}
+                      sx={styles.menuItemWrapper}
+                    >
+                      <Link component={RouterLink} to={page.path}>
+                        <Typography
+                          onMouseEnter={() => {
+                            setIsHoveredItemPath(page.path);
+                          }}
+                          onMouseLeave={() => {
+                            setIsHoveredItemPath(null);
+                          }}
+                          variant="heading3"
+                          key={index}
+                          onClick={(e) => handleCloseNavMenu(e)}
+                          className={`${currentUrl === page.path && 'pageClicked'}`}
+                          sx={[
+                            sxSeparator(styles.menuItem),
+                            sxSeparator(currentUrl === page.path && styles.activeMenuItem),
+                          ]}
+                        >
+                          {page.title}
+                        </Typography>
+                        <Box
+                          component={motion.div}
+                          onMouseEnter={() => {
+                            setIsHoveredItemPath(page.path);
+                          }}
+                          onMouseLeave={() => {
+                            setIsHoveredItemPath(null);
+                          }}
+                          variants={{
+                            open: {
+                              clipPath: 'inset(0% 0% 0% 0% round 0px)',
+                              transition: {
+                                type: 'spring',
+                                bounce: 0,
+                                duration: 0.6,
+                                delayChildren: 0.2,
+                                staggerChildren: 0.05,
+                              },
+                            },
+                            closed: {
+                              clipPath: 'inset(10% 100% 90% 0% round 10px)',
+                              transition: {
+                                type: 'spring',
+                                bounce: 0,
+                                duration: 0.7,
+                              },
+                            },
+                          }}
+                          sx={styles.menuCardWrapper}
+                        >
+                          {page.menuCard}
+                        </Box>
+                      </Link>
+                    </Box>
+                  )}
+                </>
+              );
+            })}
           </Box>
         </Toolbar>
       ) : (
@@ -173,104 +166,74 @@ const Header = () => {
               <Avatar src={Logo} sx={styles.logo} />
             </Box>
           </Link>{' '}
-          <Box sx={styles.menuContainer} component="div">
-            <Box
-              className={`border ${currentUrl == '/' && 'home'}`}
-              sx={[
-                sxSeparator(styles.animateBorder),
-                {
-                  width: `${(menuItemWidth ?? 0) + 20}px`,
-                  top: `${menuItemWidth ? '0' : '-10'}px`,
-                  left: `${(menuItemLeftOffset ?? 0) - 10}px`,
-                  '&.home': {
-                    top: `${homeIconTop ? homeIconTop + 15 : 0}px`,
-                    height: '8px',
-                  },
-                },
-              ]}
-            />
-            <Button onClick={handleClickMobileMenuButton} sx={styles.hamburgerMenuButton}>
-              <Menu />
-            </Button>
+          <Box component={motion.nav} initial={false} animate={openMobileMenu ? 'open' : 'closed'}>
             <Box
               component={motion.nav}
-              initial={false}
-              animate={openMobileMenu ? 'open' : 'closed'}
-              style={{ marginRight: '50px', background: '#aaa' }}
+              variants={{
+                open: {
+                  clipPath: 'inset(0% 0% 0% 0% round 0px)',
+                  transition: {
+                    type: 'spring',
+                    bounce: 0,
+                    duration: 0.6,
+                    delayChildren: 0.2,
+                    staggerChildren: 0.05,
+                  },
+                },
+                closed: {
+                  clipPath: 'inset(0% 0% 100% 0% round 0)',
+                  transition: {
+                    type: 'spring',
+                    bounce: 0,
+                    duration: 0.7,
+                  },
+                },
+              }}
+              sx={styles.mobileMenuItemWrapper}
             >
-              <motion.div
-                variants={{
-                  open: {
-                    clipPath: 'inset(0% 0% 0% 0% round 0px)',
-                    transition: {
-                      type: 'spring',
-                      bounce: 0,
-                      duration: 0.6,
-                      delayChildren: 0.2,
-                      staggerChildren: 0.05,
-                    },
-                  },
-                  closed: {
-                    clipPath: 'inset(0% 0% 100% 0% round 0)',
-                    transition: {
-                      type: 'spring',
-                      bounce: 0,
-                      duration: 0.7,
-                    },
-                  },
-                }}
-                style={{
-                  position: 'absolute',
-                  paddingTop: '20px',
-                  left: '0%',
-                  top: 0,
-                  background: '#3A3A3A',
-                  width: '100vw',
-                  height: '100vh',
-                }}
-              >
-                {panelEntities.map((page, index) => {
-                  return (
-                    <>
-                      {page.title && (
-                        <motion.div variants={mobileMenuItemVarients}>
-                          <motion.nav
-                            initial={false}
-                            animate={isHoveredItemPath === page.path ? 'open' : 'closed'}
-                            style={{ marginRight: '50px', position: 'relative' }}
-                          >
-                            <Link component={RouterLink} to={page.path} onClick={handleClickMobileMenuButton}>
-                              <Typography
-                                onMouseEnter={() => {
-                                  setIsHoveredItemPath(page.path);
-                                }}
-                                onMouseLeave={() => {
-                                  setIsHoveredItemPath(null);
-                                }}
-                                variant="heading3"
-                                key={index}
-                                onClick={(e) => handleCloseNavMenu(e)}
-                                className={`${currentUrl === page.path && 'pageClicked'}`}
-                                sx={[
-                                  sxSeparator(styles.menuItem),
-                                  sxSeparator(styles.mobileMenuItem),
-                                  sxSeparator(
-                                    currentUrl === page.path && { color: (theme) => theme.palette.neutral.lighter }
-                                  ),
-                                ]}
-                              >
-                                {page.title}
-                              </Typography>
-                            </Link>
-                          </motion.nav>
-                        </motion.div>
-                      )}
-                    </>
-                  );
-                })}
-              </motion.div>
+              {panelEntities.map((page, index) => {
+                return (
+                  <>
+                    {page.title && (
+                      <Box component={motion.div} variants={mobileMenuItemVarients}>
+                        <Box
+                          component={motion.div}
+                          initial={false}
+                          animate={isHoveredItemPath === page.path ? 'open' : 'closed'}
+                          sx={styles.mobileMenuItem}
+                        >
+                          <Link component={RouterLink} to={page.path} onClick={handleClickMobileMenuButton}>
+                            <Typography
+                              onMouseEnter={() => {
+                                setIsHoveredItemPath(page.path);
+                              }}
+                              onMouseLeave={() => {
+                                setIsHoveredItemPath(null);
+                              }}
+                              variant="heading3"
+                              key={index}
+                              onClick={(e) => handleCloseNavMenu(e)}
+                              className={`${currentUrl === page.path && 'pageClicked'}`}
+                              sx={[
+                                sxSeparator(styles.menuItem),
+                                sxSeparator(styles.mobileMenuItemText),
+                                sxSeparator(currentUrl === page.path && styles.activeMenuItem),
+                              ]}
+                            >
+                              {page.title}
+                            </Typography>
+                          </Link>
+                        </Box>
+                      </Box>
+                    )}
+                  </>
+                );
+              })}
             </Box>
           </Box>
+          <Button onClick={handleClickMobileMenuButton} sx={styles.hamburgerMenuButton}>
+            <Menu />
+          </Button>
         </Toolbar>
       )}
     </AppBar>
