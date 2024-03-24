@@ -23,4 +23,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.deploy_react_portfolio }}
           BRANCH: master  # Change this if you're using a different branch
-          FOLDER: build  # Change this if your build output directory is different
+          FOLDER: dist  # Change this if your build output directory is different
