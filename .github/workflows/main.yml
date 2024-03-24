@@ -22,5 +22,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           ACCESS_TOKEN: ${{ secrets.deploy_react_portfolio }}
-          BRANCH: gh-pages  # Change this if you're using a different branch
+          BRANCH: master  # Change this if you're using a different branch
           FOLDER: build  # Change this if your build output directory is different
