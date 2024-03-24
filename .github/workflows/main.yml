@@ -21,6 +21,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          ACCESS_TOKEN: ${{ secrets.deploy_react_portfolio }}
+          ACCESS_TOKEN: ${{ secrets.DEOPOY_KEY }}
           BRANCH: master  # Change this if you're using a different branch
           FOLDER: dist  # Change this if your build output directory is different
